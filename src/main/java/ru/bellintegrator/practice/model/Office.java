@@ -1,7 +1,9 @@
 package ru.bellintegrator.practice.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -43,14 +45,14 @@ public class Office {
     @Column(name = "is_active", nullable = false)
     private Boolean isActive;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")
     private Address address;
 
     /**
      * Organization which owns an office
      */
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "org_id")
     private Organization organization;
 

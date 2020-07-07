@@ -5,14 +5,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+@NamedQuery(name = DocumentType.ALL, query = "SELECT dt FROM DocumentType dt")
 @Entity
 @Table(name = "document_type", uniqueConstraints = @UniqueConstraint(columnNames = "code"))
 public class DocumentType {
+
+    public static final String ALL = "DocumentType.All";
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

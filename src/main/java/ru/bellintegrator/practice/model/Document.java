@@ -3,6 +3,7 @@ package ru.bellintegrator.practice.model;
 import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
@@ -25,7 +26,7 @@ public class Document {
     @Column(name = "date_issue", nullable = true)
     private LocalDate dateIssue;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "document_type_id")
     private DocumentType type;
 

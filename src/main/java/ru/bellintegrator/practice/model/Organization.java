@@ -1,12 +1,15 @@
 package ru.bellintegrator.practice.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -14,6 +17,9 @@ import javax.persistence.Version;
 import javax.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.Length;
 
+@NamedQueries(value = {
+
+})
 @Entity
 @Table(name = "organization",
         indexes = {
@@ -24,6 +30,7 @@ import org.hibernate.validator.constraints.Length;
         uniqueConstraints = @UniqueConstraint(columnNames = "inn")
 )
 public class Organization {
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,7 +61,7 @@ public class Organization {
     @Column(name = "full_name", length = 255, nullable = false)
     private String fullName;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", nullable = false)
     private Address address;
 
